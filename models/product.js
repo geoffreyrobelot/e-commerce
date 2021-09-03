@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const dataProducts = require("../products.json")
+
 module.exports = class Product {
     constructor(product) {
             this.title = product.title
@@ -13,6 +14,7 @@ module.exports = class Product {
             id: uuidv4(),
             category: "none",
             image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+            isShown: true
         }
         return newProduct;
     }
