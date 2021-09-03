@@ -1,8 +1,7 @@
-const dataProducts = require("../products.json")
-const products = [];
+const Product = require('../models/product')
 exports.getProduct = (req, res, next) => {
     // res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
-    res.render('home', { dataProducts })
+    res.render('home', { dataProducts:Product.fetchAll() })
 }
 
 // const Product = require('../models/Product')
