@@ -178,5 +178,13 @@
     "category": "women's clothing",
     "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
     "rating": { "rate": 3.6, "count": 145 }
+  },
+  {
+    "title": "un titre",
+    "price": "50",
+    "description": "",
+    "id": "78c7b92e-610f-4afe-9513-bf8c884fa4af",
+    "category": "none",
+    "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg"
   }
 ]

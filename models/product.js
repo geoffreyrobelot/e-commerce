@@ -6,7 +6,6 @@ module.exports = class Product {
             this.price = product.price
             this.description = product.description
         }
-        // new Product({obj})
 
     save() {
         const newProduct = {
