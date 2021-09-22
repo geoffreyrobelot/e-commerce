@@ -16,7 +16,7 @@
         <div class="row">
             <% if (dataProducts.length >0)  { %>
                 <%for (let product of dataProducts){ %>
-                    <% if (product.isShown)  { %>
+                    <!-- <% if (product.isShown)  { %>
                         <div class="col-4 mb-3">
                             <div class="card">
                                 <img class="img-fluid p-3" src=<%= product.image %> class="card-img-top" alt="..." style="width:300px; height:400px">
@@ -27,7 +27,17 @@
                                 </div>
                             </div>
                         </div>
-                    <% } %>
+                    <% } %> -->
+                    <div class="col-4 mb-3">
+                        <div class="card">
+                            <img class="img-fluid p-3" src=<%= product.image %> class="card-img-top" alt="..." style="width:300px; height:400px">
+                            <div class="card-body">
+                            <h5 class="card-title"><%= product.title.length > 10 ? product.title.substr(0,10)+"..." : product.title %></h5>
+                            <p class="card-text"><%= product.description.length > 50 ? product.description.substr(0,50)+"..." : product.description %></p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
                 <%}%>
             <%} else { %>
                 <p> Not Allowed </p>

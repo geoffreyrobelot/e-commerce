@@ -1,5 +1,7 @@
 const Product = require('../models/product')
 const { writeProduct, rewriteProduct } = require('../modules/fs')
+const ProductSchema = require('../models/product.schema')
+
 
 exports.getAddProduct = (req, res, next) => {
     // res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
@@ -7,10 +9,12 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.postAddProduct = async (req, res, next) => {
-    const product = new Product(req.body);
-    const newProduct = product.save();
-    await writeProduct(newProduct);
-
+    const product = await new ProductSchema({
+        ...req.body, isShown:true
+    });
+    const newProduct = await product.save();
+    console.log(newProduct);
+    
     res.redirect('/');
 }
 

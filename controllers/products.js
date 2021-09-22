@@ -1,7 +1,16 @@
 const Product = require('../models/product')
-exports.getProduct = (req, res, next) => {
+const ProductSchema = require('../models/product.schema')
+
+exports.getProduct = async (req, res, next) => {
     // res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
-    res.render('home', { dataProducts:Product.fetchAll() })
+    // res.render('home', { dataProducts:Product.fetchAll() })
+    try{
+        const products = await ProductSchema.find();
+        res.render('home', { dataProducts:products })
+    }
+   catch(err){
+       console.log(err);
+   }
 }
 
 // const Product = require('../models/Product')
