@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Admin</title>
+  </head>
+  <body>
+    <%- include('./components/navBar.js') %>
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-lg-12">
+
+
+          <form method="post" action="/admin/add-product" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="Title">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                value="un titre"
+              />
+            </div>
+            <div class="form-group">
+              <label for="Price">Price</label>
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                name="price"
+                value="50"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea
+                class="form-control"
+                id="description"
+                rows="3"
+                name="description"
+                value="une description"
+              ></textarea>
+              <div>
+                <h3>Ajouter une image</h3>
+                <input type="file" name="image" id="photo" />
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Title</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (dataProducts.length >0) { %> <%for (let product of
+            dataProducts){ %>
+            <tr>
+              <th scope="row"><%= product.id %></th>
+              <td><%= product.title %></td>
+              <td>
+                <form method="POST" action="/admin/unshow">
+                  <input
+                    name="product_id"
+                    type="hidden"
+                    value=<%= product.id %>
+                  />
+                  <% if (product.isShown) { %>
+                    <button type="submit" class="btn btn-warning">Unshow</button> 
+                  <% } else { %>
+                    <button type="submit" class="btn btn-light">Reshow</button>
+                  <% } %>
+                </form>
+              </td>
+              <td>
+                <form method="POST" action="/admin/remove">
+                  <input
+                    name="product_id"
+                    type="hidden"
+                    value=<%= product.id %>
+                  />
+                  <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+              </td>
+            </tr>
+            <%}%> <%} else { %>
+            <p>Not Allowed</p>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"
+  ></script>
+  </body>
+</html>
