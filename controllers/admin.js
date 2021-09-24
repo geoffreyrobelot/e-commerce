@@ -3,19 +3,34 @@ const { writeProduct, rewriteProduct } = require('../modules/fs')
 const ProductSchema = require('../models/product.schema')
 
 
-exports.getAddProduct = (req, res, next) => {
+exports.getAddProduct = async (req, res, next) => {
     // res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
-    res.render('admin', { dataProducts: Product.fetchAll() });
+    
+    const products = await ProductSchema.find();
+    console.log(products);
+    // res.render('admin', { products: ProductSchema.find() });
+    res.render('admin', {dataProducts: products});
 }
 
 exports.postAddProduct = async (req, res, next) => {
+    console.log(req.file);
+    try {  
     const product = await new ProductSchema({
-        
+        title: req.body.title,
+        price: req.body.price,
+        description: req.body.description,
+        image: req.file.filename
     });
-    const newProduct = await product.save();
-    console.log(newProduct);
-    
+    await product.save();
+    console.log(product);
+    console.log('Produit ajouté avec succès');
     res.redirect('/');
+    
+    }
+    catch (err) {
+        console.log(err.message);
+        console.log('Produit non ajouté');
+    }
 }
 
 exports.removeProduct = (req, res, next) => {

@@ -6,6 +6,7 @@ module.exports = class Product {
             this.title = product.title
             this.price = product.price
             this.description = product.description
+            this.image = product.image
         }
 
     save() {
@@ -13,7 +14,7 @@ module.exports = class Product {
             ...this, 
             id: uuidv4(),
             category: "none",
-            image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+            // image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
             isShown: true
         }
         return newProduct;
