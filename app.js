@@ -3,14 +3,21 @@ const app = express();
 const path = require('path');
 const multer = require('multer');
 const mongoose = require('mongoose');
+const user = require('./models/user');
+const router = express.Router();
+
+/*
+*Connexion en local à la base de données 
+*/
 
 // mongoose.connect("mongodb://localhost/demo")
 // .then(() => {console.log('Connect to mongodb')})
 // .catch(() => {console.log('Connect to mongodb')})
 
 
-
-// Connect to DB (Atlas)
+/*
+* Connect to DB (Atlas)
+*/
 
  mongoose.connect("mongodb+srv://e-commerce:e-commerce@cluster0.ngvph.mongodb.net/e-commerce?retryWrites=true&w=majority",
  {useNewUrlParser: true,
@@ -20,12 +27,17 @@ useUnifiedTopology: true})
 
 const port = 3001;
 
-// Import Routes
+/*
+* Import Routes
+*/
 
 const shopRoutes = require('./routes/shop.js')
 const adminRoutes = require('./routes/admin.js')
+// const loginRoutes = require('./routes/login.js')
 
-// Route Middlewares
+/*
+* Route Middlewares
+*/
 
 app.use(express.static('uploads'));
 app.set('view engine', 'ejs');
@@ -34,6 +46,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", shopRoutes.routes);
 app.use("/admin", adminRoutes.routes);
+// app.use("/login", loginRoutes.routes);
 
 
 app.listen(port, () => {

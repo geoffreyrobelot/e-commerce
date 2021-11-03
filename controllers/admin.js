@@ -1,17 +1,36 @@
 const Product = require('../models/product')
 const { writeProduct, rewriteProduct } = require('../modules/fs')
-const ProductSchema = require('../models/product.schema')
-
+const ProductSchema = require('../models/product.schema');
+const UserSchema = require('../models/user');
 
 exports.getAddProduct = async (req, res, next) => {
-    // res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
-    
     const products = await ProductSchema.find();
-    console.log(products);
-    // res.render('admin', { products: ProductSchema.find() });
+    // console.log(products);
     res.render('admin', {dataProducts: products});
 }
 
+exports.getAddUser = async (req, res, next) => {
+    const users = await UserSchema.find();
+    console.log(users);
+    res.render('admin', {users});
+}
+
+exports.postAddUser = async (req, res, next) => {
+    try {
+        const user = await new UserSchema({
+            email: req.body.email,
+            password: req.body.password
+        });
+        await user.save();
+        console.log(user);
+        console.log('Utilisateur ajouté')
+        res.redirect('/');
+    }
+    catch (err) {
+        console.log(err.message);
+        console.log('Utilisateur non ajouté')
+    }
+}
 exports.postAddProduct = async (req, res, next) => {
     console.log(req.file);
     try {  
